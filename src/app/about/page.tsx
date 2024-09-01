@@ -113,7 +113,9 @@ export default function Component() {
               ManimTubeを使って、アルゴリズムや数学の概念を視覚的に学びましょう。
             </p>
             <Link href='/signup' passHref legacyBehavior>
-              <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4'>アカウントを作成</Button>
+              <Button className='w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4'>
+                アカウントを作成
+              </Button>
             </Link>
           </CardContent>
         </Card>
