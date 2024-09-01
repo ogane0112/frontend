@@ -5,13 +5,14 @@ import { useSidebarStore } from '@/store/sidebarStore'
 import { Button } from '@/components/ui/button'
 import { Home, Compass, Upload, Heart, Menu, Info, BookOpen } from 'lucide-react'
 import { createClient } from '@/utils/supabase/client'
+import { User } from '@supabase/supabase-js'
 
 export default function Sidebar() {
   const isOpen = useSidebarStore((state) => state.isOpen)
   const toggleSidebar = useSidebarStore((state) => state.toggle)
   const router = useRouter()
   const [isMounted, setIsMounted] = useState(false)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const supabase = createClient()
 
   useEffect(() => {
