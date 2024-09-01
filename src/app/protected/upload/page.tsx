@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 const UploadForm = dynamic(() => import('@/components/upload/UploadForm'), { ssr: false })
 
 export default function Component() {
-  const [formData, setFormData] = useState({
+  const [Data, setData] = useState({
     title: '',
     manimCode: '',
     tags: [] as string[],
@@ -18,8 +18,8 @@ export default function Component() {
   })
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
-  const handleFormChange = (data: Partial<typeof formData>) => {
-    setFormData((prevData) => {
+  const handleFormChange = (data: Partial<typeof Data>) => {
+    setData((prevData) => {
       const newData = { ...prevData, ...data }
       if (newData.videoFile && newData.videoFile !== prevData.videoFile) {
         // 新しい動画ファイルが選択された場合、プレビューURLを更新
