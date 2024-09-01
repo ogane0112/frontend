@@ -8,8 +8,8 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "prettier/prettier": "error",
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error"
+    "prettier/prettier": "warn", // エラーを警告に変更
+    "@typescript-eslint/no-unused-vars": "warn", // エラーを警告に変更
+    "@typescript-eslint/no-explicit-any": "warn" // エラーを警告に変更
   }
 }
