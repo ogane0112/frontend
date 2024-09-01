@@ -38,6 +38,10 @@ export async function toggleLike(videoId: number) {
     .select('id')
     .eq('auth_id', user?.id)
 
+  if (authidError) {
+    throw new Error('ログインがありません')
+  }
+
   const userId = data[0].id
 
   // Check if the like already exists
