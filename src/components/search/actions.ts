@@ -10,5 +10,3 @@ export async function searchVideos(formData: FormData): Promise<void> {
   }
   redirect(`/explore?query=${encodeURIComponent(query)}`)
 }
-
-
