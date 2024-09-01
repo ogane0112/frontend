@@ -5,20 +5,32 @@ import { useState, useEffect } from 'react'
 const UploadForm = dynamic(() => import('@/components/upload/UploadForm'), { ssr: false })
 
 export default function Component() {
-  const [Data, setData] = useState({
+  type Data = {
+    title: string
+    manimCode: string
+    tags: string[]
+    videoFile: File | null
+    manimFile: File | null
+    description: string
+    algorithmExplanation: string
+    activeTab: string
+    references: string[]
+  }
+  
+  const [data, setData] = useState<Data>({
     title: '',
     manimCode: '',
-    tags: [] as string[],
-    videoFile: null as File | null,
-    manimFile: null as File | null,
+    tags: [],
+    videoFile: null,
+    manimFile: null,
     description: '',
     algorithmExplanation: '',
     activeTab: 'code',
-    references: [] as string[], // 参考文献の配列を追加
+    references: [],
   })
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
-  const handleFormChange = (data: Partial<typeof Data>) => {
+  const handleFormChange = (data: Partial<Data>) => {
     setData((prevData) => {
       const newData = { ...prevData, ...data }
       if (newData.videoFile && newData.videoFile !== prevData.videoFile) {
