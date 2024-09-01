@@ -37,7 +37,7 @@ export default function Component() {
         setTwitterUrl(profile.twitter_url || '')
         setGithubUrl(profile.github_url || '')
         setUploadedVideos(profile.uploadedVideos || [])
-        setLikedVideos(profile.likedVideos || [])
+        // setLikedVideos(profile.likedVideos || [])
         setIsLoggedIn(true)
       } catch (error) {
         console.error('プロフィール取得エラー:', error)
@@ -132,14 +132,14 @@ export default function Component() {
               </div>
 
               {/* いいねした動画リスト */}
-              <div className='mb-4'>
+              {/* <div className='mb-4'>
                 <h2 className='text-lg font-bold'>いいねした動画</h2>
                 <ul className='list-disc pl-5'>
                   {likedVideos.map((video) => (
                     <li key={video.id}>{video.title}</li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
               <div className='flex flex-wrap gap-4'>
                 <div className='flex items-center'>
                   <MapPin className='mr-2 h-4 w-4 text-gray-400' />
