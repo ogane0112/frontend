@@ -10,12 +10,12 @@ export async function submit(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser()
   // usersテーブルから対応するレコードを取得
-  const { data, error: authidError } = await supabase
+  const { data, error } = await supabase
     .from('users')
     .select('id')
     .eq('auth_id', user?.id)
 
-  if (!user) throw new Error('User not found')
+  if (!user) throw new Error(`User not found${error}`)
 
   const title = formData.get('title') as string
   const tags = (formData.get('tags') as string).split(',')
