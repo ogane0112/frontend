@@ -11,15 +11,15 @@ interface LikeButtonProps {
 }
 
 interface ToggleLikeResult {
-  success: boolean;
-  liked?: boolean;
-  message?: string;
+  success: boolean
+  liked?: boolean
+  message?: string
 }
 
 interface LikeStatusResult {
-  success: boolean;
-  liked?: boolean;
-  message?: string;
+  success: boolean
+  liked?: boolean
+  message?: string
 }
 
 export default function LikeButton({ videoId }: LikeButtonProps) {
@@ -60,7 +60,7 @@ export default function LikeButton({ videoId }: LikeButtonProps) {
   }, [videoId])
 
   if (error) {
-    return <div className="text-red-500">{error}</div>
+    return <div className='text-red-500'>{error}</div>
   }
 
   return (
