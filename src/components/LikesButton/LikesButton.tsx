@@ -1,7 +1,7 @@
 // components/LikeButton.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { ThumbsUp } from 'lucide-react'
 import { toggleLike, getLikeStatus, getVideoLikes } from './action'
@@ -10,28 +10,57 @@ interface LikeButtonProps {
   videoId: number
 }
 
+interface ToggleLikeResult {
+  success: boolean;
+  liked?: boolean;
+  message?: string;
+}
+
+interface LikeStatusResult {
+  success: boolean;
+  liked?: boolean;
+  message?: string;
+}
+
 export default function LikeButton({ videoId }: LikeButtonProps) {
-  const [liked, setLiked] = useState(false)
-  const [likeCount, setLikeCount] = useState(0)
+  const [liked, setLiked] = useState<boolean>(false)
+  const [likeCount, setLikeCount] = useState<number>(0)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchInitialData() {
-      const likeStatus = await getLikeStatus(videoId)
-      const initialLikes = await getVideoLikes(videoId)
-      if (likeStatus.success) {
-        setLiked(likeStatus.liked)
+      try {
+        const likeStatus: LikeStatusResult = await getLikeStatus(videoId)
+        const initialLikes: number = await getVideoLikes(videoId)
+        if (likeStatus.success && likeStatus.liked !== undefined) {
+          setLiked(likeStatus.liked)
+        }
+        setLikeCount(initialLikes)
+      } catch (err) {
+        setError('Failed to fetch initial data')
+        console.error('Error fetching initial data:', err)
       }
-      setLikeCount(initialLikes)
     }
     fetchInitialData()
   }, [videoId])
 
-  const handleLike = async () => {
-    const result = await toggleLike(videoId)
-    if (result.success) {
-      setLiked(result.liked)
-      setLikeCount((prev) => (result.liked ? prev + 1 : prev - 1))
+  const handleLike = useCallback(async () => {
+    try {
+      const result: ToggleLikeResult = await toggleLike(videoId)
+      if (result.success && result.liked !== undefined) {
+        setLiked(result.liked)
+        setLikeCount((prev) => (result.liked ? prev + 1 : prev - 1))
+      } else {
+        setError(result.message || 'Failed to toggle like')
+      }
+    } catch (err) {
+      setError('An error occurred while processing your request')
+      console.error('Error toggling like:', err)
     }
+  }, [videoId])
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>
   }
 
   return (

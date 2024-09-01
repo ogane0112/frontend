@@ -8,15 +8,6 @@ import { Badge } from '@/components/ui/badge'
 import { submit } from './action'
 import Article from '../video/Article'
 interface UploadFormProps {
-  onSubmit: (formData: {
-    title: string
-    tags: string[]
-    manimFile: File | null
-    thumbnailFile: File | null
-    description: string
-    algorithmExplanation: string
-    references: string[]
-  }) => void
   onChange: (
     formData: Partial<{
       title: string
