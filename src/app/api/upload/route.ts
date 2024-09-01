@@ -7,7 +7,7 @@ const supabase = createClient(
 )
 
 export async function POST(request: Request) {
-  const formData = await request.formData()
+  const formData = await request.formData()as FormData
   const file = formData.get('file') as File
 
   if (!file) {
