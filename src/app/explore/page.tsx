@@ -7,10 +7,22 @@ import { VideoItem } from '@/components/SearchVideos'
 import { searchVideos } from './actions'
 import { Input } from '@/components/form/input'
 import { SubmitButton } from '@/components/form/submit-button'
-
+interface VideoData {
+  id: number
+  title: string
+  description: string
+  video_url: string
+  thumbnail: string
+  views: string
+  postedAgo: string
+  channelName: string
+  channelAvatar: string
+  tags: string[]
+  likes_count: number
+}
 export default function SearchResults() {
   const router = useRouter()
-  const [videoData, setVideoData] = useState([])
+  const [videoData, setVideoData] = useState<VideoData[]>([])
   const searchParams = useSearchParams()
 
   useEffect(() => {
