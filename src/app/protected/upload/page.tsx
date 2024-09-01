@@ -16,7 +16,7 @@ export default function Component() {
     activeTab: string
     references: string[]
   }
-  
+
   const [data, setData] = useState<Data>({
     title: '',
     manimCode: '',
@@ -49,12 +49,11 @@ export default function Component() {
       }
     }
   }, [previewUrl])
-  
+
   useEffect(() => {
     // この行を追加することで、dataが使用されているとみなされる
     console.log('Data updated:', data)
   }, [data])
-
 
   return (
     <div className='min-h-screen bg-gray-900 text-gray-200 p-4 md:p-8'>
